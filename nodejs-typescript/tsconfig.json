@@ -7,5 +7,7 @@
     "strict": true,                  // 엄격한 타입 검사
     "esModuleInterop": true,         // ES6 모듈 호환
     "skipLibCheck": true             // 타입 라이브러리 검사 건너뛰기
-  }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
