@@ -9,10 +9,12 @@ yarn-error.log*
 yarn.lock
 Dockerfile
 .dockerignore
-
 .vscode/
 .idea/
-
 .DS_store
 Thumbs.db
+
+*.exe
 .exe
+*.zip
+.zip

@@ -3,29 +3,27 @@
 #include <time.h>
 
 struct tm parse_datetime(char* datetime_str) {
-	// Implement your code
-	struct tm datetime = {0};
 
-     sscanf(datetime_str, "%d-%d-%d %d:%d",
-           &datetime.tm_year, &datetime.tm_mon, &datetime.tm_mday,
-           &datetime.tm_hour, &datetime.tm_min);
-
-    datetime.tm_year -= 1900; // tm_year는 1900년 기준
-    datetime.tm_mon -= 1;     // tm_mon은 0부터 시작 (0 = January)
-
-    return datetime;
+	struct tm dt = {0};
+	
+	sscanf(datetime_str,"%d-%d-%d %d:%d",&dt.tm_year,&dt.tm_mon,&dt.tm_mday,&dt.tm_hour,&dt.tm_min);
+	
+	dt.tm_year += 1900;
+	dt.tm_mon += 1;
+	
+	return dt;
 }
 
 int detect_schedule_conflict(struct tm *start1, struct tm *end1, struct tm *start2, struct tm *end2) {
 	// Implement your code
+	time_t start_t1 = mktime(start1);
+	time_t end_t1 = mktime(end1);
+	time_t start_t2 = mktime(start2);
+	time_t end_t2 = mktime(end2);
 	
-    time_t t_start1 = mktime(start1);
-    time_t t_end1 = mktime(end1);
-    time_t t_start2 = mktime(start2);
-    time_t t_end2 = mktime(end2);
-
-    return (t_start1 < t_end2 && t_start2 < t_end1);
+	return (start_t1 < end_t2 && start_t2 < end_t1);
 }
+
 
 int main() {
     char start1[20], end1[20], start2[20], end2[20];
