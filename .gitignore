@@ -14,6 +14,10 @@ Dockerfile
 .DS_store
 Thumbs.db
 
+venv
+venv/
+.venv
+
 *.exe
 .exe
 *.zip
