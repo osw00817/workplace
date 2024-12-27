@@ -1,5 +1,5 @@
 # Mysql
-
+메타코드 강의 수강중
 ---
 
 ## DataType
@@ -71,7 +71,7 @@ where height < 190
 
 ### 논리연산자: AND OR NOT
 
-연산자 우선순위 AND > OR
+- 연산자 우선순위 AND > OR
 
 WHERE A = 17 AND B = 17
 WHERE A = 18 OR A = 19
@@ -92,7 +92,29 @@ WHERE A NOT BETWEEN 10 AND 20
 WHERE orderdate IN ('2003-02-11','2003-02-17')
 WHERE a IN (1,2,3,4,5,6,7,8,9)
 
-WHERE A NOT IN (1,2,3,4,5,6,7,8,9)
+WHERE A NOT IN (1,2,3)
+HWERE A <> 1 AND A <> 2 AND A <> 3
+<> : NOT
+
+WHERE A IS NULL
+WHERE A IS NOT NULL
+
+### ORDER BY
+
+- 기본 오름차순 ASC 
+- 내림차순으로 정렬하려면 DESC
+
+ORDER BY 컬럼명1 DESC, 컬렴명2 ASC, ...
+(오름차순 생략가능)
+
+ORDER BY A
+ORDER BY A DESC
+
+ORDERBY A DESC, B ASC
+A 먼저 내림차순 정렬 후 같은 B에 한하여 ASC 정렬
+
+
+
 
 
 
