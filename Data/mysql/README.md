@@ -113,6 +113,145 @@ ORDER BY A DESC
 ORDERBY A DESC, B ASC
 A 먼저 내림차순 정렬 후 같은 B에 한하여 ASC 정렬
 
+### GROUP BY
+
+- 한개 이상의 컬럼을 기준으로 결과를 그룹화
+- SUM, AVG, COUNT, MAX, MIN
+
+SELECT SUM(컬럼명) , AVG(컬럼명) FROM 테이블 GROUP BY 그룹 칼럼
+
+select * from customers;
+select city, avg(creditLimit) as averageCreditLimit 
+from customers 
+group by city 
+order by averageCreditLimit desc
+limit 5;
+
+### HAVING
+
+- 그룹화 조건 확인
+- 항상 group by 뒤에 위치하며 group by 이후 그룹화 된 테이블에 조건 적용
+
+select 컬럼
+from 테이블
+where 조건
+group by 조건
+having 조건
+order by 조건
+
+### IF / CASE
+
+- IF (condition, value_if_true, value_if_false)
+
+SELECT checkNumber, amount IF(amount > 50000, 'Large', 'Small') AS orderSize 
+From payments
+
+CASE 
+when value1 THEN result1
+when value2 Then result2
+...
+ELSE result
+END AS ~
+
+SELECT productName, buyPrice,
+CASE
+WHEN buyPirce < 20 THEN 'Cheap'
+WHEN buyPirce BETWEEN 20 AND 50
+THEN 'Moderate'
+ELSE 'Expensive'
+END AS priceCatergory
+FROM products;
+
+SELECT firstName, lastName, jobTitle,
+CASE jobTitle
+when '홍길동' then '홍동길'
+when '홍동동' then '홍길동'
+ELSE '홍길길'
+END AS NAME
+FROM employees;
+
+### JOIN
+
+- SELECT * FROM TABLE A JOIN B ON 조건 ~
+
+ex3 
+id,name,age
+ex4
+id,region
+
+SELECT * FROM ex3 JOIN ex4 ON ex3.id = ex4.id;
+
+#### LEFT JOIN
+
+SELECT * FROM ex3 LEFT JOIN ex4 ON ex3.id = ex4.id;
+
+SELECT * FROM ex3 LEFT JOIN ex4 ON ex3.id = ex4.id WHERE ex4.id IS null;
+
+#### RIGHT JOIN
+
+SELECT * FROM ex3 RIGHT JOIN ex4 ON ex3.id = ex4.id;
+
+SELECT * FROM ex3 RIGHT JOIN ex4 ON ex3.id = ex4.id WHERE ex3.id IS   NULL;
+
+#### INNER JOIN
+
+SELECT * FROM ex3 join ex4 ib ex3.id = ex4.id
+
+### UNION
+
+- 두 테이블의 데이터를 ㅔㅅ로로 쭉 나열하는 역할
+- 컬럼 수가 같아야 하며, 중복은 제거 된다.
+
+SELECT id FROM ex3 
+UNION
+SELECT id FROM ex4;
+
+SELECT id FROM ex3
+UNION ALL
+SELECT id FROM ex4;
+
+- FULL OUTER JOIN
+
+SELECT ex3.id, ex3.name, ex3.age, ex4.id, ex4.region
+FROM ex3
+LEFT JOIN ex4 ON ex3.id = ex4.id
+union
+SELECT ex3.id, ex3.name, ex3.age, ex4.,id, ex4.region 
+FROM ex3
+RIGHT JOIN ex4 ON ex3.id = ex4.id
+WHERE ex3.id IS NULL;
+
+## WINDOW 함수
+
+### SELECT 구문에서 사용되며 분석 구간을 변동시키는 역할
+
+- SUM(과학점수) OVER(PARTITION BY 반 ORDER BY 출석번호) AS 새컬럼명
+GROUP BY와 비슷하지만, 함축적으로 나오지않고 그대로 테이블이 나옴.
+
+- EX 누적합
+SELECT customernumber, paymentdate, amout,
+sum(amount) OVER(PARTITION BY CUSTOMERNUMBER ORDER BY PAYMENTDATE) AS total_amount FROM payments;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
